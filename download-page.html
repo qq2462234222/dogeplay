@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>下载 dogeplay</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:linear-gradient(135deg,#f1eaff,#fff0f4);color:#302c3d;font-family:"Microsoft YaHei",system-ui,sans-serif}
+    main{width:min(100%,520px);padding:40px;border:1px solid #e9e3f4;border-radius:24px;background:#fff;box-shadow:0 20px 70px #7657e815}h1{font-size:30px;margin:0 0 10px}.brand{color:#7657e8;font-weight:700;margin:0 0 20px}p{line-height:1.8;color:#746a88}a{display:block;text-align:center;text-decoration:none;background:#7657e8;color:white;border-radius:12px;padding:14px 20px;font-weight:700;margin:24px 0 16px}a:hover{background:#5b3cc4}.small{font-size:13px;margin-bottom:0}
+  </style>
+  <noscript><meta http-equiv="refresh" content="1;url=../files/dogeplay-setup.exe"></noscript>
+</head>
+<body>
+  <main>
+    <p class="brand">♫ dogeplay · 作者 doge</p>
+    <h1>下载最新版客户端</h1>
+    <p id="status">正在开始下载。如果浏览器没有自动下载，请点击下方按钮。</p>
+    <a id="download" href="../files/dogeplay-setup.exe" download="dogeplay-setup.exe">下载 Windows 安装包</a>
+    <p>下载后双击安装，默认安装到 D:\dogeplay，可自行更改位置。安装后可通过桌面快捷方式启动。</p>
+    <p class="small">需要免安装版？<a style="display:inline;background:none;color:#7657e8;padding:0" href="../files/dogeplay-latest-win-x64.zip">下载完整 ZIP</a>，完整解压后打开 dogeplay.exe。</p>
+    <p class="small">免费使用 · 仅供学习交流<br>支持 Windows 10 / 11，64 位系统。</p>
+  </main>
+  <script>
+    const link = document.getElementById('download');
+    const target = new URL(link.getAttribute('href'), location.href);
+    target.searchParams.set('t', Date.now().toString());
+    link.href = target.href;
+    location.replace(target.href);
+  </script>
+</body>
+</html>

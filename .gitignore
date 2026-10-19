@@ -1,0 +1,43 @@
+app/
+app-update/
+app-backups/
+releases/
+*.WebView2/
+EBWebView/
+tools/
+downloads/
+test-output/
+*.log
+
+# Local credentials, browser profiles and editor files must never be committed.
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.key
+*.pem
+*.pdb
+.vs/
+.idea/
+**/PiaStudyWebView/
+**/User Data/
+**/Cookies
+**/Login Data
+**/Local State
+**/settings.json
+**/library.json
+
+# Generated builds, packaging tools, runtime data and credentials.
+.release-build-*/
+.resource-build-*/
+update-stage/
+data/
+maintenance/
+本地数据备份/
+宝塔直接上传/
+*.zip
+*.msi
+*.sha256
+update-server/files/
+update-server/download/

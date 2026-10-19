@@ -1,0 +1,1 @@
+﻿源码目录只提供部署示例。实际发布时，请在本地 app/update-server 中生成对应当前构建的文件，校验后先上传 files，再上传 manifest.json、latest.json 和公告。不要将示例清单直接部署。

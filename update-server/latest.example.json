@@ -1,0 +1,10 @@
+{
+  "app": "dogeplay",
+  "version": "2026.10.18.6",
+  "packageUrl": "files/dogeplay-setup.exe",
+  "size": 78718063,
+  "sha256": "4999aa7fac9f2d7e28866e13a0e3bed2d7692ed1ee83675ec525465ec82b673b",
+  "portableUrl": "files/dogeplay-latest-win-x64.zip",
+  "portableSize": 86280495,
+  "portableSha256": "19fedc25ffbac336109eac82f45defd79d9cde011daa9e009d6f25343ab70635"
+}

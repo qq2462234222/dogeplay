@@ -1,0 +1,28 @@
+{
+  "size": 846522,
+  "version": "2026.10.18.6",
+  "sha256": "ebfb9985b55259fa5d0a75d166eac22ad0638879bf7865e3e720cf0e2220cc85",
+  "product": "dogeplay",
+  "packageUrl": "files/dogeplay-2026.10.18.6-patch.zip",
+  "app": "LumaKeys",
+  "files": [
+    "LumaKeys.exe",
+    "update-config.json",
+    "BrotliSharpLib.dll",
+    "Microsoft.Web.WebView2.Core.dll",
+    "Microsoft.Web.WebView2.Wpf.dll",
+    "WebView2Loader.dll",
+    "scripts/number-ocr.ps1",
+    "assets/dogeplay.ico",
+    "assets/release/LICENSE",
+    "assets/release/README.md",
+    "assets/release/THIRD_PARTY_NOTICES.md"
+  ],
+  "announcement": {
+    "id": "dogeplay-2026-10-15",
+    "title": "dogeplay 更新服务已上线",
+    "content": "这里填写维护者的更新说明。",
+    "publishedUtc": "2026-10-10T00:00:00Z"
+  },
+  "notes": "新增北京时间定时开始，支持多台设备使用同一目标时刻同步；定时模式跳过普通倒计时，等待目标时刻再发出第一音。"
+}
