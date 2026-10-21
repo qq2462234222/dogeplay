@@ -10,6 +10,7 @@ Windows 游戏键盘乐器演奏工具，使用 C# / WPF。支持本地曲库、
 
 - GitHub 源码与发行版：[qq2462234222/dogeplay](https://github.com/qq2462234222/dogeplay) · [下载最新发行版](https://github.com/qq2462234222/dogeplay/releases/latest)。
 - 直接下载正式安装包：[dogeplay 安装包](http://47.113.189.245:88/download/)。此地址由作者维护，可能与仓库发行版更新时间不同。
+- Windows 安全提示：发布包只有在使用受信任 CA 的代码签名证书签名后，才可能显示已验证发布者。GitHub/Gitee 本身不会替代 Authenticode 签名；自签名证书不能消除 SmartScreen 警告。
 
 - 使用者：推荐下载 EXE 安装包，首次默认安装到 `D:\dogeplay`，可更改位置；没有 D 盘时使用系统盘。也可下载 `win-x64.zip`，完整解压到可写文件夹，双击根目录的 `dogeplay.exe`。
 - 维护者：源码、构建脚本和许可证可公开查看；发布包仍不包含本地曲库、设置、Cookie 或其他个人数据。
@@ -103,11 +104,19 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\prepare-engine
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\prepare-installer.ps1
 ```
 
+获得受信任的代码签名证书并将其安装到当前 Windows 用户的“个人”证书存储后，可用证书指纹给程序和安装器签名。私钥不作为命令行参数传递：
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\package-release.ps1 -CertificateThumbprint <证书指纹>
+```
+
 只生成仓库发行版、不改动本地宝塔下载站内容时，给下方命令追加 `-SkipDownloadSite`。`tools/` 和运行数据均不进入 Git 仓库。
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\package-release.ps1
 ```
+
+带受信任证书发布时，将上面的命令改为 `-CertificateThumbprint <证书指纹>`。不要把 PFX、私钥或密码提交到仓库。
 
 脚本从全新目录编译，按明确的文件清单生成运行包，不生成源码包。ZIP 逐项核对内容与 SHA-256；输出到上一级 `app/releases`，附检查报告和校验文件。所有文件均扫描常见凭据格式及本机个人路径，发现可疑项会停止；这不能替代对任意未知格式秘密的人工审查。
 

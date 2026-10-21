@@ -2,7 +2,8 @@
     [Parameter(Mandatory=$true)][string]$PayloadDirectory,
     [Parameter(Mandatory=$true)][string]$OutputDirectory,
     [Parameter(Mandatory=$true)][string]$ReleaseZip,
-    [switch]$SkipDownloadSite
+    [switch]$SkipDownloadSite,
+    [string]$CertificateThumbprint
 )
 $ErrorActionPreference='Stop'
 $root=$PSScriptRoot
@@ -19,6 +20,9 @@ $license=Join-Path $out 'installer-license.txt'
 if($LASTEXITCODE -ne 0){throw 'Installer compilation failed.'}
 $setup=Join-Path $out ('dogeplay-'+$version+'-setup-win-x64.exe')
 if(-not(Test-Path -LiteralPath $setup)){throw 'Installer output missing.'}
+if (-not [string]::IsNullOrWhiteSpace($CertificateThumbprint)) {
+    & (Join-Path $root 'scripts\sign-authenticode.ps1') -FilePath $setup -CertificateThumbprint $CertificateThumbprint
+}
 $hash=(Get-FileHash -LiteralPath $setup -Algorithm SHA256).Hash.ToLowerInvariant()
 [IO.File]::WriteAllText(($setup+'.sha256'),$hash+'  '+[IO.Path]::GetFileName($setup)+"`r`n",[Text.Encoding]::ASCII)
 if (-not $SkipDownloadSite) { & (Join-Path $root 'prepare-download.ps1') -ReleaseZip $ReleaseZip -SetupExe $setup }

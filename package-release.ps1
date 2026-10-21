@@ -1,4 +1,4 @@
-﻿param([switch]$SkipDownloadSite)
+﻿param([switch]$SkipDownloadSite,[string]$CertificateThumbprint)
 $ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
 $releaseId = 'dogeplay-' + (Get-Date -Format 'yyyyMMdd-HHmmss') + '-' + [Guid]::NewGuid().ToString('N').Substring(0,6) + '-win-x64'
@@ -61,6 +61,10 @@ Copy-ReleaseTree (Join-Path $build 'tools\audiveris\Audiveris') 'tools\audiveris
 Copy-ReleaseFile (Join-Path $root 'LICENSE') 'LICENSE'
 Copy-ReleaseFile (Join-Path $root 'RELEASE_README.md') 'README.md'
 
+if (-not [string]::IsNullOrWhiteSpace($CertificateThumbprint)) {
+    & (Join-Path $root 'scripts\sign-authenticode.ps1') -FilePath (Join-Path $package 'dogeplay.exe') -CertificateThumbprint $CertificateThumbprint
+}
+
 $notices = [IO.File]::ReadAllText((Join-Path $root 'THIRD_PARTY_NOTICES.md'))
 $notices = $notices.Replace('`app/tools/audiveris/Audiveris`', '`tools/audiveris/Audiveris`')
 [IO.File]::WriteAllText((Join-Path $package 'THIRD_PARTY_NOTICES.md'),$notices,[Text.UTF8Encoding]::new($false))
@@ -91,7 +95,7 @@ foreach ($item in Get-ChildItem -LiteralPath $package -Recurse -File) {
             }
         }
     }
-    $manifest += [ordered]@{path=$relative;bytes=$item.Length;sha256=(Get-FileHash -LiteralPath $item.FullName -Algorithm SHA256).Hash}
+    $manifest += [ordered]@{path=$relative;bytes=$item.Length;sha256=(Get-FileHash -LiteralPath $item.FullName -Algorithm SHA256).Hash.ToLowerInvariant()}
 }
 [IO.File]::WriteAllText((Join-Path $package 'manifest-sha256.json'),(ConvertTo-Json -InputObject @($manifest) -Depth 4),[Text.UTF8Encoding]::new($false))
 $allowed.Add('manifest-sha256.json')
@@ -133,7 +137,7 @@ $report = @"
 - 发布包不含自有源码或源码 ZIP；界面资源嵌入 EXE。第三方组件仍保留原许可。
 "@
 [IO.File]::WriteAllText((Join-Path $out '发布检查报告.md'),$report,[Text.UTF8Encoding]::new($false))
-& (Join-Path $root 'build-installer.ps1') -PayloadDirectory $package -OutputDirectory $out -ReleaseZip $zipPath -SkipDownloadSite:$SkipDownloadSite
+& (Join-Path $root 'build-installer.ps1') -PayloadDirectory $package -OutputDirectory $out -ReleaseZip $zipPath -SkipDownloadSite:$SkipDownloadSite -CertificateThumbprint $CertificateThumbprint
 if(Test-Path -LiteralPath $build){Remove-Item -LiteralPath $build -Recurse -Force}
 Write-Output ('Release ZIP: ' + $zipPath)
 

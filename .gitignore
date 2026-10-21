@@ -18,6 +18,8 @@ test-output/
 *.key
 *.pem
 *.pdb
+*.pfx
+*.p12
 .vs/
 .idea/
 **/PiaStudyWebView/
