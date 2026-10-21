@@ -13,8 +13,6 @@ test-output/
 .env
 .env.*
 !.env.example
-*.pfx
-*.p12
 *.key
 *.pem
 *.pdb

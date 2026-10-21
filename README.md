@@ -110,6 +110,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\prepare-instal
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\package-release.ps1 -CertificateThumbprint <证书指纹>
 ```
 
+签名前需要安装 Windows 10/11 SDK 的 Signing Tools（提供 `signtool.exe`）。证书必须包含 Code Signing 用途和私钥；普通 HTTPS 网站证书、免费自签名证书都不能让 Edge 信任下载包。
+
 只生成仓库发行版、不改动本地宝塔下载站内容时，给下方命令追加 `-SkipDownloadSite`。`tools/` 和运行数据均不进入 Git 仓库。
 
 ```powershell
