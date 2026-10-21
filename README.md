@@ -12,6 +12,18 @@ Windows 游戏键盘乐器演奏工具，使用 C# / WPF。支持本地曲库、
 - 直接下载正式安装包：[dogeplay 安装包](http://47.113.189.245:88/download/)。此地址由作者维护，可能与仓库发行版更新时间不同。
 - Windows 安全提示：发布包只有在使用受信任 CA 的代码签名证书签名后，才可能显示已验证发布者。GitHub/Gitee 本身不会替代 Authenticode 签名；自签名证书不能消除 SmartScreen 警告。
 
+## Code signing policy
+
+Free code signing provided by SignPath.io, certificate by SignPath Foundation
+(application pending). Signed releases are built from this public repository
+and published on the GitHub Releases page. The project maintainer is the
+author, committer, reviewer and release approver for the current single-
+maintainer project.
+
+Privacy policy: [PRIVACY.md](PRIVACY.md). The application does not transfer
+information to other networked systems unless specifically requested by the
+user or the person installing or operating it.
+
 - 使用者：推荐下载 EXE 安装包，首次默认安装到 `D:\dogeplay`，可更改位置；没有 D 盘时使用系统盘。也可下载 `win-x64.zip`，完整解压到可写文件夹，双击根目录的 `dogeplay.exe`。
 - 维护者：源码、构建脚本和许可证可公开查看；发布包仍不包含本地曲库、设置、Cookie 或其他个人数据。
 - Windows 10/11 x64，要求 .NET Framework 4.8。无需安装 Python、Node.js 或 .NET SDK。
